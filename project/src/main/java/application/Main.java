@@ -38,6 +38,7 @@ public class Main extends Application {
 		launch(args);
 		SaveHandler.loadToOuterMap("UserGrades");
 		System.out.println(UserProfile.outerMap.toString());
+		System.out.println("Blankeste");
 		
 //		ObjectInputStream in = new ObjectInputStream(new FileInputStream("UserData.txt"));
 //		in.readObject();

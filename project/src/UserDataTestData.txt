@@ -1,0 +1,6 @@
+Andreas Olborg;Fag11=A, Fag12=A, Fag13=A, Fag14=A
+Thea Tangen;Fag21=B, Fag22=B, Fag23=B, Fag24=B
+Ludde;Fag31=C, Fag32=C, Fag33=C, Fag34=C
+Håkon Lund;Fag41=D, Fag42=D, Fag43=D, Fag44=D
+Test Person1;Fag51=E, Fag52=E, Fag53=E, Fag54=E
+Test Person2;Fag61=E, Fag62=A, Fag63=B, Fag64=C

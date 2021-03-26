@@ -1,9 +1,9 @@
-Seb;testset3=D, ÆÆÆÆÆÆÆÆÆÆÆÆÆÆ=B, Fag1=D, Fag3=D, Fag2=D, Diskmat=A, Fag4=D
+Seb;testset3=D, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=B, Fag1=D, Fag3=D, Fag2=D, Diskmat=A, Fag4=D
 Thea Tangen;test=C, S1 matte=D, Fag1=B, Fag3=B, Fag2=B, Fag4=B
 Ludde;Fag1=C, Fag3=C, Fag2=C, Fag4=C
 Freddy;testetst34=F, testse=E
 k;AAAAAAndy=D, etert=D
 Test Person1;Fag1=E, Fag3=E, Fag2=E, Fag4=E
 Skjalg;MATTE2=E, Matte1=F, Diskmat=F, ITGK=E
-Andreas Olborg;S1=E, S2=A
+Andreas Olborg;tewtw4=D, S1=E, S2=A
 Test Person2;Fag1=E, Fag3=B, Fag2=A, Fag4=C

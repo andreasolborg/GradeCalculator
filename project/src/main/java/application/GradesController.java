@@ -8,9 +8,12 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,12 +45,16 @@ public class GradesController implements Initializable {
 	static List<String> gradesList = new ArrayList<String>();
 	static String[] gradeSplitter;
 //	static HashMap<String, HashMap<String, String>> outerMap1 = new HashMap<>();
+	List<TextField> courseNameList = new ArrayList<>();
+	List<ComboBox<String>> courseGradeList = new ArrayList<>();
 	
 	
 	@FXML
 	public ComboBox<String> course1, course2, course3, course4, course5, course6, course7, course8;
 	@FXML
-	private TextField courseName1, courseName2, courseName3, courseName4, courseName5, courseName6, courseName7, courseName8; 
+	private TextField courseName1, courseName2, courseName3, courseName4, courseName5, courseName6, courseName7, courseName8;
+	
+	
 	
 	ObservableList<String> list = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
 	
@@ -63,7 +70,31 @@ public class GradesController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) { 
+		
+		courseNameList.clear();
+		courseGradeList.clear();
+		
+		courseNameList.add(courseName1);
+		courseNameList.add(courseName2);
+		courseNameList.add(courseName3);
+		courseNameList.add(courseName4);
+		courseNameList.add(courseName5);
+		courseNameList.add(courseName6);
+		courseNameList.add(courseName7);
+		courseNameList.add(courseName8);
+	
+		courseGradeList.add(course1);
+		courseGradeList.add(course2);
+		courseGradeList.add(course3);
+		courseGradeList.add(course4);
+		courseGradeList.add(course5);
+		courseGradeList.add(course6);
+		courseGradeList.add(course7);
+		courseGradeList.add(course8);
+		
+		
 		System.out.println("Bruker som er logget inn er: "+ MainController.loggedInUser);
+		System.out.println(courseNameList);
 		loggedInUser = MainController.loggedInUser;
 		isLoggedIn = true;
 		try {
@@ -72,12 +103,11 @@ public class GradesController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("outerMap.toString() " + UserProfile.outerMap.toString());
+//		System.out.println("outerMap.toString() " + UserProfile.outerMap.toString());
 
 //		System.out.println(gradesList);       //tester for liste med navn og hashmap(grades)
 		
-		
-		System.out.println(gradesList);
+//		System.out.println(UserProfile.outerMap.values().toArray()[1].toString());
 		
 		course1.setItems(list);
 		course2.setItems(list);
@@ -87,6 +117,23 @@ public class GradesController implements Initializable {
 		course6.setItems(list);
 		course7.setItems(list);
 		course8.setItems(list);
+		
+		Set<String> courseSet = UserProfile.outerMap.get(loggedInUser).keySet();
+		Collection<String> gradesSet = UserProfile.outerMap.get(loggedInUser).values();
+		gradesList = new ArrayList<>(gradesSet);
+		List<String> courseList = new ArrayList<>(courseSet);
+		System.out.println(gradesSet);
+		System.out.println(courseList);
+		
+		for(int i = 0; i < courseList.size(); i++) {
+			courseNameList.get(i).setText(courseList.get(i));  //legger til data i tekstbokser
+			System.out.println(courseGradeList);
+//			System.out.println(courseGradeList.get(i));
+			courseGradeList.get(i).setSelectedIndex(gradesList.get(i));
+		}
+		
+		
+		
 	}
 	
 	public void addGrades(ActionEvent event) throws FileNotFoundException, IOException {

@@ -55,8 +55,7 @@ public class UserProfile {
 	}
 	
 	public static void registerUser(String user, int year) throws FileNotFoundException {               //lager ny UserProfile, legger til i HashMap "Users"	
-		UserProfile userProfile = new UserProfile(user, year);
-		
+		UserProfile userProfile = new UserProfile(user, year);	
 		Users.put(userProfile.getUsernameInput(), userProfile.getYearInput());
 		outerMap.put(userProfile.getUsernameInput(), new HashMap<>());
 		SaveHandler.saveUserData("UserData");	

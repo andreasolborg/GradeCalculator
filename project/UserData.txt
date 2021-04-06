@@ -12,3 +12,8 @@ Freddy;1990
 Georg;1990
 Skjalg;2001
 k;1990
+Andy B;1990
+Thea;1990
+Eirik;1990
+Andreas;1990
+A;1990

@@ -33,7 +33,7 @@ public class MainController implements Initializable{
 	@FXML
 	private TextField usernameInput, yearInput;	
 	/**
-	 * informasjon om brukeren, navn og f�dsel�r
+	 * info about user and year
 	 */
 	private UserProfile userProfile;
 	@FXML	
@@ -58,6 +58,9 @@ public class MainController implements Initializable{
 		String username = usernameInput.getText();
 		isLoggedIn = false;
 		BufferedReader br = new BufferedReader(new FileReader("UserData.txt"));
+		if(username.isBlank()) {
+			throw new IllegalArgumentException("Invalid login credentials!");
+		}
 		for (String line = br.readLine(); line != null; line = br.readLine()) {
 			line = line.split(";")[0];
 //			System.out.println(line);  prints all registrererd users
@@ -81,17 +84,15 @@ public class MainController implements Initializable{
 			if(line.equals(username)){
 				loggedInText.setText("User already exists");
 				throw new IllegalArgumentException("User already exists");
-//				break;
 			}
 		}
+		
 		UserProfile.registerUser(username, year);
 		loggedInText.setText("Velkommen " + username);
 		isLoggedIn = true;
 	}
 
-	
-	
-	public void openGradesWindow(ActionEvent event) throws IOException {
+	public void openGradesWindow(ActionEvent event) throws IOException {  //good
 		if(isLoggedIn) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("grades.fxml"));
 		Parent mainRoot = loader.load();
@@ -100,11 +101,10 @@ public class MainController implements Initializable{
 		window.setScene(mainScene);
 		window.show();
 		}else {
-			loggedInText.setText("Du må logge inn først.");
+			loggedInText.setText("Log in first");
 		}
 	}
 	
-
 	public void openAvgWindow(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("average.fxml"));
 		Parent mainRoot = loader.load();
@@ -123,5 +123,4 @@ public class MainController implements Initializable{
 		window.show();
 	}
 	
-
 }

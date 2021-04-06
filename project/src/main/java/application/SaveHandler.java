@@ -35,7 +35,6 @@ public class SaveHandler {
 				new FileReader(getFilePath(filename)));
 	}
 
-	
 	public static void saveUserData(String filename) throws FileNotFoundException {
 		try {
 			BufferedWriter bw = new BufferedWriter(
@@ -46,11 +45,6 @@ public class SaveHandler {
 			for(Map.Entry me : UserProfile.Users.entrySet()) {
 				bw.append(me.getKey() + ";" + me.getValue()+"\n");
 			}
-			
-//			String s;
-//			while((s = br.readLine()) != null) {
-//				bw.write(s + "\n");
-//			}
 			br.close();
 			bw.close();
 		}catch(Exception ex) {
@@ -77,8 +71,7 @@ public class SaveHandler {
 			}catch(Exception ex) {
 		return;
 	}
-	}
-	
+}
 	
 	public void saveUserData1(String filename) throws FileNotFoundException {
 		try (PrintWriter writer = new PrintWriter(getFilePath(filename))) {
@@ -102,8 +95,7 @@ public class SaveHandler {
 }
 	 
 	public static void loadToOuterMap(String filename) throws FileNotFoundException {
-		String[] stringSplitter = null;
-		
+		String[] stringSplitter = null;	
 		try {
 			BufferedWriter bw = new BufferedWriter(
 					new FileWriter(getFilePath(filename), true));
@@ -111,10 +103,10 @@ public class SaveHandler {
 					new FileReader(getFilePath(filename)));
 			String s;
 			while((s = br.readLine()) != null) {
-				stringSplitter = s.split(";");                                 //splitter navn og karakterer
+				stringSplitter = s.split(";");                                 //splits names and grades
 				String [] gradesSplitter = stringSplitter[1].split(", ");
 //				System.out.println(stringSplitter[0]);
-//				System.out.println(stringSplitter[1].split(", ")[0].split("=")[0]);				   //printer det første faget til hver person								
+//				System.out.println(stringSplitter[1].split(", ")[0].split("=")[0]);				   //prints first course for ea person							
 //				System.out.println(stringSplitter[0]);
 				UserProfile userProfile = new UserProfile(stringSplitter[0], 1999);
 				UserProfile.outerMap.put(stringSplitter[0], new HashMap<>());
@@ -124,13 +116,9 @@ public class SaveHandler {
 //					UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);
 					UserProfile.outerMap.get(stringSplitter[0]).put(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);
 					
-//					(stringSplitter[0], UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]));  //må putte et unikt hashmap, ikke userGrades
+//					(stringSplitter[0], UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]));  //maa putte et unikt hashmap, ikke userGrades
 //					UserProfile.userGrades.c
-				}
-				
-
-				
-				
+				}			
 			}
 //			System.out.println(UserProfile.userGrades.toString());
 			br.close();
@@ -141,27 +129,8 @@ public class SaveHandler {
 		}
 		}
 		
-
-	
 	private static String getFilePath(String filename) {
 		return SAVE_FOLDER + filename + ".txt";
 	}
-	
-	
-	
-	public static void main(String[] args) throws FileNotFoundException {
-		
-		loadToOuterMap("UserGrades");
-		MainController.isLoggedIn = true;
-		MainController.loggedInUser = "Andreas Olborg";
-		UserProfile.userGrades = new HashMap<String, String>();   //denne er viktig, uten denne får jeg bugen som oppstod i hashmap
-//		UserProfile.addGrades("Diskmat", "C");
-//		UserProfile.addGrades("ITGK", "B");
-//		UserProfile.addGrades("JAVA", "D");
-//		UserProfile.addGrades("Matte 2", "C");
-//		UserProfile.outerMap.put(MainController.loggedInUser, UserProfile.userGrades);
 
-
-		SaveHandler.saveUserGrades("UserGrades");
-	}
 }

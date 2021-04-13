@@ -48,10 +48,9 @@ public class GradesController implements Initializable {
 	private Button clearMap;
 	
 	public boolean isLoggedIn = true;
-	public String loggedInUser = MainController.loggedInUser;
+	public static String loggedInUser = MainController.loggedInUser;
 	static List<String> gradesList = new ArrayList<String>();
 	static String[] gradeSplitter;
-//	static HashMap<String, HashMap<String, String>> outerMap1 = new HashMap<>();
 	
 	
 	List<TextField> courseNameList = new ArrayList<>();                       //two variables used to loop over textfields/combobox values
@@ -76,6 +75,17 @@ public class GradesController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) { 	
+		SaveHandler saveHandler = new SaveHandler();
+		try {
+			saveHandler.loadToOuterMap("UserGrades");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println(UserProfile.getUserGrades());	
+		System.out.println(UserProfile.userGrades);
+		
 		loggedInUser = MainController.loggedInUser;
 		isLoggedIn = true;
 		activeUser.setText("Bruker: " + loggedInUser);
@@ -91,7 +101,6 @@ public class GradesController implements Initializable {
 		courseNameList.add(courseName6);
 		courseNameList.add(courseName7);
 		courseNameList.add(courseName8);
-	
 		courseGradeList.add(course1);
 		courseGradeList.add(course2);
 		courseGradeList.add(course3);
@@ -101,17 +110,7 @@ public class GradesController implements Initializable {
 		courseGradeList.add(course7);
 		courseGradeList.add(course8);
 		
-//		System.out.println("courseName List: [TextField[id=courseName1, styleClass=text-input text-field], TextField[id=courseName2, styleClass=text-input text-field] " + courseNameList);
-
-		try {
-			SaveHandler.loadToOuterMap("UserGrades");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		System.out.println("outerMap.toString() @@@@@@@ " + UserProfile.outerMap.toString());
-		System.out.println("gradesList@@@@@@@@@@@" + gradesList);       //tester for liste med navn og hashmap(grades)
-		System.out.println("UserProfile.outerMap.values().toArray()[1].toString()@@@@@@@@@@@@" + UserProfile.outerMap.values().toArray()[1].toString());
-		
+//		System.out.println("courseName List: [TextField[id=courseName1, styleClass=text-input text-field], TextField[id=courseName2, styleClass=text-input text-field] " + courseNameList);	
 		course1.setItems(list);
 		course2.setItems(list);
 		course3.setItems(list);
@@ -120,22 +119,26 @@ public class GradesController implements Initializable {
 		course6.setItems(list);
 		course7.setItems(list);
 		course8.setItems(list);
-		
-		Set<String> courseSet = UserProfile.outerMap.get(loggedInUser).keySet();
-		Collection<String> gradesSet = UserProfile.outerMap.get(loggedInUser).values();
-		gradesList = new ArrayList<>(gradesSet);
-		List<String> courseList = new ArrayList<>(courseSet);
-//		System.out.println(gradesSet);
-//		System.out.println(courseList);
-		
-		for(int i = 0; i < courseList.size(); i++) {
-//			System.out.println(courseGradeList);
-//			System.out.println(courseGradeList.get(i));
-			courseNameList.get(i).setText(courseList.get(i));  										//adds students courseNames to corresponding textfields
-			courseGradeList.get(i).getSelectionModel().select(gradesList.get(i));					//adds students grades to corresponding comboBox
+				
+		if(!(UserProfile.outerMap.get(loggedInUser).equals(null))) {
+			Set<String> courseSet = UserProfile.outerMap.get(loggedInUser).keySet();
+			Collection<String> gradesSet = UserProfile.outerMap.get(loggedInUser).values();  //ny inne i if
+			gradesList = new ArrayList<>(gradesSet);
+			List<String> courseList = new ArrayList<>(courseSet);
+			
+			System.out.println("gradesList@@@@@@@@@@@" + gradesList);       //tester for liste med navn og hashmap(grades)
+			
+			for(int i = 0; i < courseList.size(); i++) {
+//				System.out.println(courseGradeList);
+//				System.out.println(courseGradeList.get(i));
+				courseNameList.get(i).setText(courseList.get(i));  										//adds students courseNames to corresponding textfields
+				courseGradeList.get(i).getSelectionModel().select(gradesList.get(i));					//adds students grades to corresponding comboBox
+			} 
+		}	else {
+			System.out.println("!");
 		}
-		
-		
+//		System.out.println(gradesSet);
+//		System.out.println(courseList);	
 		
 	}
 	
@@ -145,6 +148,10 @@ public class GradesController implements Initializable {
 	}
 	
 	public void addGrades(ActionEvent event) throws FileNotFoundException, IOException {
+		
+		SaveHandler saveHandler = new SaveHandler();
+		
+		UserProfile.outerMap.get(loggedInUser).clear();
 		System.out.println("Du er logget inn som " + loggedInUser);
 		String str0 = (String)course1.getValue();
 		String str1 = (String)course2.getValue();
@@ -156,14 +163,11 @@ public class GradesController implements Initializable {
 		String str7 = (String)course8.getValue();
 		
 		UserProfile.userGrades = new HashMap<String, String>();   //denne er viktig, uten denne får jeg bugen som oppstod i hashmap
-//		UserProfile.addGradesInApp(courseName1.getText(), str0);
-		
-
-		
-//		UserProfile.outerMap.put(loggedInUser, new HashMap<>());
 		
 //		UserProfile.outerMap.get(loggedInUser).computeIfAbsent(courseName.getText(), val -> str);  --------> old method x8
 		
+		
+	
 		UserProfile.outerMap.get(loggedInUser).put(courseName1.getText(), str0);
 		UserProfile.outerMap.get(loggedInUser).put(courseName2.getText(), str1);
 		UserProfile.outerMap.get(loggedInUser).put(courseName3.getText(), str2);
@@ -175,6 +179,12 @@ public class GradesController implements Initializable {
 		
 		UserProfile.outerMap.get(loggedInUser).values().removeAll(Collections.singleton(null));   //removes null's as appears when blank spaces
 		
+
+		System.out.println(UserProfile.outerMap.get(loggedInUser));  //I want something like this.userProfile.getUserGrades
+		if(UserProfile.outerMap.get(loggedInUser).isEmpty()) {
+			System.out.println("AAAAAAAAAAAAAAAAAAAaA");
+			UserProfile.outerMap.get(loggedInUser).put("", "F");
+		}
 		
 		List<String> values = new ArrayList<>(UserProfile.outerMap.get(loggedInUser).values());                 //LoggedInUsers grades as list
 		Calculation calc = new Calculation();
@@ -183,11 +193,12 @@ public class GradesController implements Initializable {
 //		System.out.println(UserProfile.outerMap.toString());
 //		System.out.println("UserProfile.outerMap.get(loggedInUser)         " + UserProfile.outerMap.get(loggedInUser));
 
-		SaveHandler.saveUserGrades("UserGrades");
+		saveHandler.saveUserGrades("UserGrades");
 		
 	}
+
 	
 	public static void main(String[] args) {
-		
+
 	}
 }

@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 
-public class SaveHandler {
+public class SaveHandler implements saver {
 
 	static List<String> gradesList = new ArrayList<String>();
 	static String[] gradeSplitter;
@@ -30,12 +30,12 @@ public class SaveHandler {
 	
 	public final static String SAVE_FOLDER = "";
 
-	public static void loadData(String filename) throws FileNotFoundException {
+	public void loadData(String filename) throws FileNotFoundException {
 		BufferedReader br = new BufferedReader(
 				new FileReader(getFilePath(filename)));
 	}
 
-	public static void saveUserData(String filename) throws FileNotFoundException {
+	public void saveUserData(String filename) throws FileNotFoundException {
 		try {
 			BufferedWriter bw = new BufferedWriter(
 					new FileWriter(getFilePath(filename), true));
@@ -51,9 +51,8 @@ public class SaveHandler {
 			return;
 		}
 }
-	
-	
-	public static void saveUserGrades(String filename) throws FileNotFoundException {
+		
+	public void saveUserGrades(String filename) throws FileNotFoundException {
 		try {
 //			System.out.println("UserProfile.outerMap.toString(): --------------- " + UserProfile.outerMap.toString());	
 			BufferedWriter bw = new BufferedWriter(
@@ -76,7 +75,6 @@ public class SaveHandler {
 	public void saveUserData1(String filename) throws FileNotFoundException {
 		try (PrintWriter writer = new PrintWriter(getFilePath(filename))) {
 				System.out.println(UserProfile.Users);
-//				List<String> info = new ArrayList<>();
 				loadToOuterMap(getFilePath(filename));
 				for(Map.Entry me : UserProfile.Users.entrySet()) {
 					writer.println("Du er logget inn som: "+ me.getKey() + ", year: " + UserProfile.Users.get(me.getKey()));
@@ -94,7 +92,7 @@ public class SaveHandler {
 		}
 }
 	 
-	public static void loadToOuterMap(String filename) throws FileNotFoundException {
+	public void loadToOuterMap(String filename) throws FileNotFoundException {
 		String[] stringSplitter = null;	
 		try {
 			BufferedWriter bw = new BufferedWriter(
@@ -103,22 +101,30 @@ public class SaveHandler {
 					new FileReader(getFilePath(filename)));
 			String s;
 			while((s = br.readLine()) != null) {
+				if(s.contains("=")) {
 				stringSplitter = s.split(";");                                 //splits names and grades
 				String [] gradesSplitter = stringSplitter[1].split(", ");
-//				System.out.println(stringSplitter[0]);
-//				System.out.println(stringSplitter[1].split(", ")[0].split("=")[0]);				   //prints first course for ea person							
-//				System.out.println(stringSplitter[0]);
-				UserProfile userProfile = new UserProfile(stringSplitter[0], 1999);
-				UserProfile.outerMap.put(stringSplitter[0], new HashMap<>());
+//																																							System.out.println(stringSplitter[0]);
+//																																							System.out.println(stringSplitter[1].split(", ")[0].split("=")[0]);				   //prints first course for ea person							
+//																																							System.out.println(stringSplitter[0]);
+				UserProfile.userGrades = new HashMap<>();
+				UserProfile userProfile = new UserProfile(stringSplitter[0], 1999, new HashMap<String, String>(), false);
+				UserProfile.outerMap.put(userProfile.getUsernameInput(), new HashMap<>());
 				for(int i = 0; i < gradesSplitter.length; i++) {
-//					System.out.println(gradesSplitter[i].split("=")[0]);
-//					System.out.println(gradesSplitter[i].split("=")[1]);   //hver brukers karakter
-//					UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);
-					UserProfile.outerMap.get(stringSplitter[0]).put(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);
-					
+					Course course = new Course(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);
+					UserProfile.userGrades.put(course.getCourseName(), course.getGrade());
+					UserProfile.outerMap.put(userProfile.getUsernameInput(), userProfile.userGrades);			
+//					UserProfile.outerMap.get(userProfile.getUsernameInput()).put(course.getCourseName(), course.getGrade());
+
+//																																							System.out.println(gradesSplitter[i].split("=")[0]);
+//																																							System.out.println(gradesSplitter[i].split("=")[1]);   //hver brukers karakter
+//																																							UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);								
+//					UserProfile.outerMap.get(stringSplitter[0]).put(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);						
 //					(stringSplitter[0], UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]));  //maa putte et unikt hashmap, ikke userGrades
-//					UserProfile.userGrades.c
-				}			
+
+				} UserProfile.userProfiles.add(userProfile);
+			}
+				
 			}
 //			System.out.println(UserProfile.userGrades.toString());
 			br.close();
@@ -129,7 +135,7 @@ public class SaveHandler {
 		}
 		}
 		
-	private static String getFilePath(String filename) {
+	public String getFilePath(String filename) {
 		return SAVE_FOLDER + filename + ".txt";
 	}
 

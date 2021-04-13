@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,10 +33,6 @@ public class MainController implements Initializable{
 	public Button loginButton, registerButton;
 	@FXML
 	private TextField usernameInput, yearInput;	
-	/**
-	 * info about user and year
-	 */
-	private UserProfile userProfile;
 	@FXML	
 	private AnchorPane rootPane;
 	@FXML
@@ -43,14 +40,23 @@ public class MainController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	}
+		if(loggedInUser != null) {
+			loggedInText.setText("Velkommen " + loggedInUser);
+			usernameInput.setText(loggedInUser);
+		}
+	
+	
+		SaveHandler saveHandler = new SaveHandler();
+		try {
+			saveHandler.loadToOuterMap("UserGrades");
+//			System.out.println(UserProfile.userProfiles);
+			for(Object userProfile: UserProfile.userProfiles) {
+				System.out.println(userProfile.getClass().getDeclaredMethods().toString());
+			}
 
-	public Text getLoggedInText() {
-		return loggedInText;
-	}
-
-	public void setLoggedInText(Text isLoggedIn) {
-		this.loggedInText = isLoggedIn;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void verifyLoginCredentials(ActionEvent event) throws IOException {
@@ -71,7 +77,7 @@ public class MainController implements Initializable{
 			}
 		}
 		if (!isLoggedIn) {
-			loggedInText.setText("Ikke registrert bruker");
+			loggedInText.setText("User doesn't exist.");
 		}
 	}	
 	
@@ -82,12 +88,13 @@ public class MainController implements Initializable{
 		for (String line = br.readLine(); line != null; line = br.readLine()) {
 			line = line.split(";")[0];
 			if(line.equals(username)){
+				
 				loggedInText.setText("User already exists");
 				throw new IllegalArgumentException("User already exists");
 			}
 		}
 		
-		UserProfile.registerUser(username, year);
+		UserProfile.registerUser(username, year, new HashMap<String, String>(), false);
 		loggedInText.setText("Velkommen " + username);
 		isLoggedIn = true;
 	}
@@ -121,6 +128,14 @@ public class MainController implements Initializable{
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(mainScene);
 		window.show();
+	}
+	
+	public Text getLoggedInText() {
+		return loggedInText;
+	}
+
+	public void setLoggedInText(Text isLoggedIn) {
+		this.loggedInText = isLoggedIn;
 	}
 	
 }

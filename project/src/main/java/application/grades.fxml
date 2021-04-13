@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #f9aa33;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GradesController">
    <children>
-      <Button fx:id="addGrades" layoutX="50.0" layoutY="388.0" mnemonicParsing="false" onAction="#addGrades" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #344955;" text="Legg til karakterer" textAlignment="CENTER" textFill="#f9aa33">
+      <Button fx:id="addGrades" layoutX="50.0" layoutY="388.0" mnemonicParsing="false" onAction="#addGrades" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #344955;" text="Add grades to user" textAlignment="CENTER" textFill="#f9aa33">
          <font>
             <Font name="Calibri Bold" size="25.0" />
          </font>
@@ -23,7 +23,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="50.0" layoutY="37.0" mnemonicParsing="false" onAction="#openHomeWindow" prefHeight="6.0" prefWidth="94.0" style="-fx-background-color: #344955;" text="Tilbake" textAlignment="CENTER" textFill="#f9aa33">
+      <Button layoutX="50.0" layoutY="37.0" mnemonicParsing="false" onAction="#openHomeWindow" prefHeight="6.0" prefWidth="94.0" style="-fx-background-color: #344955;" text="Back" textAlignment="CENTER" textFill="#f9aa33">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
@@ -48,7 +48,7 @@
       <TextField fx:id="courseName6" layoutX="296.0" layoutY="226.0" promptText="Navn på fag" />
       <TextField fx:id="courseName8" layoutX="296.0" layoutY="288.0" promptText="Navn på fag" />
       <TextField fx:id="courseName7" layoutX="57.0" layoutY="288.0" promptText="Navn på fag" />
-      <Text fx:id="activeUser" layoutX="295.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bruker:" wrappingWidth="140.0">
+      <Text fx:id="activeUser" layoutX="295.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User:" wrappingWidth="140.0">
          <font>
             <Font name="Calibri" size="14.0" />
          </font>

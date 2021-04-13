@@ -1,0 +1,9 @@
+Seb;Chillfag=D, Fag1=D, Samføk=D, SØK1000=B, Fag3=D, Diskmat=A, Fag4=D
+Thea Tangen;test=C, S1 matte=D, Fag1=B, Fag3=B, Fag2=B, Fag4=B
+Skjalg Nysæter;Java=E, Mek=B, Diskmat=A, ITGK=B
+Thea;Sweet=A, Mans=C, Søt=E
+Freddy;Java=E, Diskmat=F
+Ludde;Fag1=C, Fag3=C, Fag2=C, Fag4=C
+Daniel;it1=A, Apex=E
+Andy B;Matte1=A, Matte2=A, Matte58=E
+Eirik;TestFag2=C, Sonans=B, Test2=C

@@ -104,15 +104,17 @@ public class SaveHandler implements saver {
 				if(s.contains("=")) {
 				stringSplitter = s.split(";");                                 //splits names and grades
 				String [] gradesSplitter = stringSplitter[1].split(", ");
+				
 //																																							System.out.println(stringSplitter[0]);
 //																																							System.out.println(stringSplitter[1].split(", ")[0].split("=")[0]);				   //prints first course for ea person							
 //																																							System.out.println(stringSplitter[0]);
-				UserProfile.userGrades = new HashMap<>();
-				UserProfile userProfile = new UserProfile(stringSplitter[0], 1999, new HashMap<String, String>(), false);
+//				UserProfile.userGrades = new HashMap<>();
+				UserProfile userProfile = new UserProfile(stringSplitter[0], 1337, new HashMap<String, String>(), false);
 				UserProfile.outerMap.put(userProfile.getUsernameInput(), new HashMap<>());
 				for(int i = 0; i < gradesSplitter.length; i++) {
 					Course course = new Course(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);
-					UserProfile.userGrades.put(course.getCourseName(), course.getGrade());
+					userProfile.userGrades.put(course.getCourseName(), course.getGrade());
+					userProfile.setUserGrades(userProfile.userGrades);
 					UserProfile.outerMap.put(userProfile.getUsernameInput(), userProfile.userGrades);			
 //					UserProfile.outerMap.get(userProfile.getUsernameInput()).put(course.getCourseName(), course.getGrade());
 

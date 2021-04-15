@@ -1,10 +1,13 @@
-Seb;Chillfag=D, Fag1=D, Samføk=D, SØK1000=B, Fag3=D, Diskmat=A, Fag4=D
 Thea Tangen;test=C, S1 matte=D, Fag1=B, Fag3=B, Fag2=B, Fag4=B
-Skjalg Nysæter;Java=E, Mek=B, Diskmat=A, ITGK=B
-Thea;Sweet=A, Mans=C, Søt=E
+ADADA;a=F
 Freddy;Java=E, Diskmat=F
-Ludde;Fag1=C, Fag3=C, Fag2=C, Fag4=C
 Daniel;it1=A, Apex=E
-Andy B;Matte1=A, Matte2=A, Matte58=E
+Andy B;Matte1=B, Matte2=A, Matte58=A
 Eirik;TestFag2=C, Sonans=B, Test2=C
+Testmann;A-faget=A
+Seb;Chillfag=D, Fag1=D, Fag3=D, Diskmat=A, Fag4=D, Sï¿½K1000=B, Samfï¿½k=D
+Skjalg Nysï¿½ter;Java=E, Mek=B, Diskmat=A, ITGK=B
+Thea;Sweet=A, Sot=E, Mans=C
+Ludde;Fag1=C, Fag3=C, Fag2=C, Fag4=C
+Testmann1;B-faget=D
 Andreas Olborg;Test1=A, test5=A, test3=B, Test2=A

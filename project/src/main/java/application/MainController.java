@@ -49,12 +49,15 @@ public class MainController implements Initializable{
 		SaveHandler saveHandler = new SaveHandler();
 		try {
 			saveHandler.loadToOuterMap("UserGrades");
+			System.out.println(UserProfile.outerMap.toString());
 //			System.out.println(UserProfile.userProfiles);
-			for(Object userProfile: UserProfile.userProfiles) {
-				System.out.println(userProfile.getClass().getDeclaredMethods().toString());
+			for(int i = 0; i<UserProfile.userProfiles.size(); i++) {
+				UserProfile userProfile = (UserProfile) UserProfile.userProfiles.get(i);
+				System.out.println(userProfile.getUsernameInput() + " har hashmap: " + userProfile.getUserGrades() + ". født i " + userProfile.getYearInput());
 			}
 
-		} catch (FileNotFoundException e) {
+		} catch
+		(FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -125,7 +128,7 @@ public class MainController implements Initializable{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("settings.fxml"));
 		Parent mainRoot = loader.load();
 		Scene mainScene = new Scene(mainRoot);
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Stage window = (Stage) ((Node)	 event.getSource()).getScene().getWindow();
 		window.setScene(mainScene);
 		window.show();
 	}

@@ -83,8 +83,8 @@ public class GradesController implements Initializable {
 		}
 		
 		
-		System.out.println(UserProfile.getUserGrades());	
-		System.out.println(UserProfile.userGrades);
+//		System.out.println(UserProfile.getUserGrades());	
+//		System.out.println(UserProfile.userGrades);
 		
 		loggedInUser = MainController.loggedInUser;
 		isLoggedIn = true;
@@ -162,7 +162,7 @@ public class GradesController implements Initializable {
 		String str6 = (String)course7.getValue();
 		String str7 = (String)course8.getValue();
 		
-		UserProfile.userGrades = new HashMap<String, String>();   //denne er viktig, uten denne får jeg bugen som oppstod i hashmap
+//		UserProfile.userGrades = new HashMap<String, String>();   //denne er viktig, uten denne får jeg bugen som oppstod i hashmap
 		
 //		UserProfile.outerMap.get(loggedInUser).computeIfAbsent(courseName.getText(), val -> str);  --------> old method x8
 		

@@ -11,11 +11,11 @@ public class UserProfile {
 	private String usernameInput;
 	private int yearInput;
 	static String fileName = "saver.txt";
-	private boolean isLoggedIn;
+	private boolean isLoggedIn = false;
 	
 	static HashMap<String, HashMap<String, String>> outerMap = new HashMap<>();   //2d hashmap
 	static HashMap<String, Integer> Users = new HashMap<>();
-	static HashMap<String, String> userGrades;
+	public HashMap<String, String> userGrades;
 	public static List<Object> userProfiles = new ArrayList<Object>();
 	
 	
@@ -25,7 +25,7 @@ public class UserProfile {
 
 	public UserProfile(String usernameInput, int yearInput, HashMap<String, String> userGrades, boolean isLoggedIn) {
 		validUsername(usernameInput, yearInput);
-		userGrades = new HashMap<String, String>();
+		this.userGrades = new HashMap<String, String>();
 		this.usernameInput = usernameInput;
 		this.yearInput = yearInput;
 		this.setLoggedIn(false);
@@ -53,6 +53,11 @@ public class UserProfile {
 			}
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return getUsernameInput();
+	}
 	
 	//Setters og Getters
 	public String getUsernameInput() {
@@ -71,12 +76,12 @@ public class UserProfile {
 		this.yearInput = yearInput;
 	}
 	
-	public static HashMap<String, String> getUserGrades() {
+	public HashMap<String, String> getUserGrades() {
 		return userGrades;
 	}
 
-	public static void setUserGrades(HashMap<String, String> userGrades) {
-		UserProfile.userGrades = userGrades;
+	public void setUserGrades(HashMap<String, String> userGrades) {
+		this.userGrades = userGrades;
 	}
 
 	public boolean isLoggedIn() {

@@ -1,5 +1,5 @@
 Thea Tangen;1999
-Skjalg Nysæter;2000
+Skjalg Nysï¿½ter;2000
 Freddy;1999
 Daniel;1999
 Andy B;1999
@@ -8,3 +8,10 @@ Seb;1999
 Thea;1999
 Ludde;2000
 Andreas Olborg;1990
+Testmann;1990
+Testmann1;1990
+Testmann;1990
+Testmann22;1990
+Testmann1;1990
+Testmann;1990
+ADADA;1990

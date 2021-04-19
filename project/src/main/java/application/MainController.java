@@ -32,7 +32,7 @@ public class MainController implements Initializable{
 	@FXML
 	public Button loginButton, registerButton;
 	@FXML
-	private TextField usernameInput, yearInput;	
+	private TextField usernameInput;	
 	@FXML	
 	private AnchorPane rootPane;
 	@FXML
@@ -53,7 +53,7 @@ public class MainController implements Initializable{
 //			System.out.println(UserProfile.userProfiles);
 			for(int i = 0; i<UserProfile.userProfiles.size(); i++) {
 				UserProfile userProfile = (UserProfile) UserProfile.userProfiles.get(i);
-				System.out.println(userProfile.getUsernameInput() + " har hashmap: " + userProfile.getUserGrades() + ". født i " + userProfile.getYearInput());
+				System.out.println(userProfile.getUsernameInput() + " har hashmap: " + userProfile.getUserGrades() + "born " + userProfile.getYearInput());
 			}
 
 		} catch
@@ -97,7 +97,7 @@ public class MainController implements Initializable{
 			}
 		}
 		
-		UserProfile.registerUser(username, year, new HashMap<String, String>(), false);
+		UserProfile.registerUser(username, new HashMap<String, String>(), false);
 		loggedInText.setText("Velkommen " + username);
 		isLoggedIn = true;
 	}

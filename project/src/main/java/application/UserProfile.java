@@ -14,7 +14,7 @@ public class UserProfile {
 	private boolean isLoggedIn = false;
 	
 	static HashMap<String, HashMap<String, String>> outerMap = new HashMap<>();   //2d hashmap
-	static HashMap<String, Integer> Users = new HashMap<>();
+	static HashMap<String, String> Users = new HashMap<>();
 	public HashMap<String, String> userGrades;
 	public static List<Object> userProfiles = new ArrayList<Object>();
 	
@@ -23,11 +23,10 @@ public class UserProfile {
 		//discarded
 	}
 
-	public UserProfile(String usernameInput, int yearInput, HashMap<String, String> userGrades, boolean isLoggedIn) {
-		validUsername(usernameInput, yearInput);
+	public UserProfile(String usernameInput, HashMap<String, String> userGrades, boolean isLoggedIn) {
+		validUsername(usernameInput);
 		this.userGrades = new HashMap<String, String>();
 		this.usernameInput = usernameInput;
-		this.yearInput = yearInput;
 		this.setLoggedIn(false);
 	}
 	
@@ -37,12 +36,12 @@ public class UserProfile {
 	
 
 	
-	public static void registerUser(String user, int year, HashMap<String, String> userGrades, boolean isLoggedIn) throws FileNotFoundException {               //lager ny UserProfile, legger til i HashMap "Users"	
+	public static void registerUser(String user, HashMap<String, String> userGrades, boolean isLoggedIn) throws FileNotFoundException {               //lager ny UserProfile, legger til i HashMap "Users"	
 		SaveHandler saveHandler = new SaveHandler();
-		UserProfile userProfile = new UserProfile(user, year, new HashMap<String, String>(), false);	
+		UserProfile userProfile = new UserProfile(user, new HashMap<String, String>(), false);	
 		userProfile.userGrades.put("Legg inn fag", "A");
 		System.out.println(userProfile.userGrades);
-		Users.put(userProfile.getUsernameInput(), userProfile.getYearInput());
+		Users.put(userProfile.getUsernameInput(), "");
 		outerMap.put(userProfile.getUsernameInput(), userProfile.userGrades);
 		saveHandler.saveUserData("UserData");	
 		saveHandler.saveUserGrades("UserGrades");
@@ -51,8 +50,8 @@ public class UserProfile {
 	
 	
 
-	public void validUsername(String user, int year) {	     //valideringsmetode
-		if (user.isEmpty() || user.isBlank() || year <= 0) {
+	public void validUsername(String user) {	     //valideringsmetode
+		if (user.isEmpty() || user.isBlank()) {
 			throw new IllegalArgumentException("Year must be >= 0 and user !blank");
 			}
 	}

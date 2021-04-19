@@ -8,23 +8,4 @@ Seb;1999
 Thea;1999
 Ludde;2000
 Andreas Olborg;1990
-Testmann;1990
-Testmann1;1990
-Testmann;1990
-Testmann22;1990
-Testmann1;1990
-Testmann;1990
-ADADA;1990
-aaaa;1990
-aaab;1990
-aaabb;1990
-andyf;1990
-andreasb;1990
-freddy;1990
-Fiksbug;1990
-Fiksbug2;1990
-Ludde2;1990
-jjyjyjyjyjyj;1990
-Jon;1990
-Jon;1990
-J;1990
+Andy55

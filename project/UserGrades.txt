@@ -1,10 +1,14 @@
 Thea Tangen;test=C, S1 matte=D, Fag1=B, Fag3=B, Fag2=B, Fag4=B
-ADADA;a=F
+Ludde2;Legg inn fag=A
+Jon;Diskmat=C, aaaa=A
 Freddy;Java=E, Diskmat=F
+J;Legg inn fag=A
 Daniel;it1=A, Apex=E
 Andy B;Matte1=B, Matte2=A, Matte58=A
 Eirik;TestFag2=C, Sonans=B, Test2=C
 Testmann;A-faget=A
+jjyjyjyjyjyj;Legg inn fag=A
+Fiksbug2;Legg inn fag=A
 Seb;Chillfag=D, Fag1=D, Fag3=D, Diskmat=A, Fag4=D, S�K1000=B, Samf�k=D
 Skjalg Nys�ter;Java=E, Mek=B, Diskmat=A, ITGK=B
 Thea;Sweet=A, Sot=E, Mans=C

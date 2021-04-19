@@ -40,9 +40,12 @@ public class UserProfile {
 	public static void registerUser(String user, int year, HashMap<String, String> userGrades, boolean isLoggedIn) throws FileNotFoundException {               //lager ny UserProfile, legger til i HashMap "Users"	
 		SaveHandler saveHandler = new SaveHandler();
 		UserProfile userProfile = new UserProfile(user, year, new HashMap<String, String>(), false);	
+		userProfile.userGrades.put("Legg inn fag", "A");
+		System.out.println(userProfile.userGrades);
 		Users.put(userProfile.getUsernameInput(), userProfile.getYearInput());
-		outerMap.put(userProfile.getUsernameInput(), new HashMap<String, String>());
+		outerMap.put(userProfile.getUsernameInput(), userProfile.userGrades);
 		saveHandler.saveUserData("UserData");	
+		saveHandler.saveUserGrades("UserGrades");
 	}
 	
 	

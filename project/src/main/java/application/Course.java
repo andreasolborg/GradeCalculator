@@ -9,6 +9,12 @@ public class Course { // i denne klassen lager vi et Course objekt, som innehold
 		this.grade = grade;
 	}
 	
+	public void checkValidCourse(String grade) {
+		if(!(grade.contains("A") || grade.contains("B") || grade.contains("C") || grade.contains("D") || grade.contains("E")  || grade.contains("F"))) {
+			throw new IllegalArgumentException("Invalid grade");
+		}
+	}
+	
 	public String getCourseName() {
 		return courseName;
 	}

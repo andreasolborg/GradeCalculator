@@ -5,6 +5,7 @@ public class Course { // i denne klassen lager vi et Course objekt, som innehold
 	private String grade;
 	
 	public Course(String courseName, String grade) {
+		checkValidCourse(grade);
 		this.courseName = courseName;
 		this.grade = grade;
 	}
@@ -28,6 +29,7 @@ public class Course { // i denne klassen lager vi et Course objekt, som innehold
 	}
 
 	public void setGrade(String grade) {
+		checkValidCourse(grade);
 		this.grade = grade;
 	}
 

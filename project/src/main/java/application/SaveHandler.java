@@ -24,8 +24,8 @@ import java.util.Scanner;
 
 public class SaveHandler implements saver {
 
-	static List<String> gradesList = new ArrayList<String>();
-	static String[] gradeSplitter;
+	List<String> gradesList = new ArrayList<String>();
+	String[] gradeSplitter;
 	static HashMap<String, String> outerMap1 = new HashMap<>();
 	
 	public final static String SAVE_FOLDER = "";

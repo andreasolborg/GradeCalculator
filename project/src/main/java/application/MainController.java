@@ -63,7 +63,7 @@ public class MainController implements Initializable{
 	}
 	
 	public void verifyLoginCredentials(ActionEvent event) throws IOException {
-		int year = Integer.parseInt(yearInput.getText());
+//		int year = Integer.parseInt(yearInput.getText());
 		String username = usernameInput.getText();
 		isLoggedIn = false;
 		BufferedReader br = new BufferedReader(new FileReader("UserData.txt"));
@@ -85,7 +85,7 @@ public class MainController implements Initializable{
 	}	
 	
 	public void registerUser(ActionEvent event) throws IOException {
-		int year = Integer.parseInt(yearInput.getText());
+//		int year = Integer.parseInt(yearInput.getText());
 		String username = usernameInput.getText();
 		BufferedReader br = new BufferedReader(new FileReader("UserData.txt"));
 		for (String line = br.readLine(); line != null; line = br.readLine()) {
@@ -114,24 +114,7 @@ public class MainController implements Initializable{
 			loggedInText.setText("Log in first");
 		}
 	}
-	
-	public void openAvgWindow(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("average.fxml"));
-		Parent mainRoot = loader.load();
-		Scene mainScene = new Scene(mainRoot);
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(mainScene);
-		window.show();
-	}
-	
-	public void openSettings(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("settings.fxml"));
-		Parent mainRoot = loader.load();
-		Scene mainScene = new Scene(mainRoot);
-		Stage window = (Stage) ((Node)	 event.getSource()).getScene().getWindow();
-		window.setScene(mainScene);
-		window.show();
-	}
+
 	
 	public Text getLoggedInText() {
 		return loggedInText;

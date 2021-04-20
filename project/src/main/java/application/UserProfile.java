@@ -9,7 +9,6 @@ import java.util.List;
 public class UserProfile {
 	
 	private String usernameInput;
-	private int yearInput;
 	static String fileName = "saver.txt";
 	private boolean isLoggedIn = false;
 	
@@ -18,28 +17,23 @@ public class UserProfile {
 	public HashMap<String, String> userGrades;
 	public static List<Object> userProfiles = new ArrayList<Object>();
 	
-	
-	public static void makeGradeMap(HashMap userGrades) { //prøver lage metode slik at hvert student sine karakterer er et eget objekt. så må jeg endre hashmap til (username, object (der object er hashmap)))
-		//discarded
-	}
 
 	public UserProfile(String usernameInput, HashMap<String, String> userGrades, boolean isLoggedIn) {
 		validUsername(usernameInput);
 		this.userGrades = new HashMap<String, String>();
 		this.usernameInput = usernameInput;
 		this.setLoggedIn(false);
+		userProfiles.add(this);
 	}
 	
 	public UserProfile() {  //empty constructor
 		
 	}
-	
 
-	
 	public static void registerUser(String user, HashMap<String, String> userGrades, boolean isLoggedIn) throws FileNotFoundException {               //lager ny UserProfile, legger til i HashMap "Users"	
 		SaveHandler saveHandler = new SaveHandler();
 		UserProfile userProfile = new UserProfile(user, new HashMap<String, String>(), false);	
-		userProfile.userGrades.put("Legg inn fag", "A");
+//		userProfile.userGrades.put("Legg inn fag", "A");
 		System.out.println(userProfile.userGrades);
 		Users.put(userProfile.getUsernameInput(), "");
 		outerMap.put(userProfile.getUsernameInput(), userProfile.userGrades);
@@ -49,11 +43,16 @@ public class UserProfile {
 	}
 	
 	
-
 	public void validUsername(String user) {	     //valideringsmetode
 		if (user.isEmpty() || user.isBlank()) {
 			throw new IllegalArgumentException("Year must be >= 0 and user !blank");
 			}
+	}
+	
+	public void validGradesMap() {
+		if(userGrades.isEmpty()) {
+			throw new IllegalArgumentException("Empty grademap!");
+		}
 	}
 	
 	@Override
@@ -71,17 +70,11 @@ public class UserProfile {
 		this.usernameInput = usernameInput;
 	}
 
-	public int getYearInput() {
-		return yearInput;
-	}
-
-	public void setYearInput(int yearInput) {
-		this.yearInput = yearInput;
-	}
 	
 	public HashMap<String, String> getUserGrades() {
 		return userGrades;
 	}
+	
 
 	public void setUserGrades(HashMap<String, String> userGrades) {
 		this.userGrades = userGrades;

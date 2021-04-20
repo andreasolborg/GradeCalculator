@@ -28,6 +28,8 @@ public class MainController implements Initializable{
 
 	public static boolean isLoggedIn;
 	public static String loggedInUser;
+	private UserProfile userProfile;
+	private static UserProfile activeAccount;
 	
 	@FXML
 	public Button loginButton, registerButton;
@@ -46,39 +48,59 @@ public class MainController implements Initializable{
 		}
 	
 	
-		SaveHandler saveHandler = new SaveHandler();
-		try {
-			saveHandler.loadToOuterMap("UserGrades");
-			System.out.println(UserProfile.outerMap.toString());
-//			System.out.println(UserProfile.userProfiles);
+//		SaveHandler saveHandler = new SaveHandler();
+//			saveHandler.loadToOuterMap("UserGrades");
+//			System.out.println(UserProfile.outerMap.toString());
+		
+		
+			System.out.println(UserProfile.userProfiles);
 			for(int i = 0; i<UserProfile.userProfiles.size(); i++) {
 				UserProfile userProfile = (UserProfile) UserProfile.userProfiles.get(i);
-				System.out.println(userProfile.getUsernameInput() + " har hashmap: " + userProfile.getUserGrades() + "born " + userProfile.getYearInput());
+				System.out.println(userProfile.getUsernameInput() + " har hashmap: " + userProfile.getUserGrades());
 			}
-
-		} catch
-		(FileNotFoundException e) {
-			e.printStackTrace();
-		}
 	}
 	
+	
+	
 	public void verifyLoginCredentials(ActionEvent event) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader("UserData.txt"));
+		isLoggedIn = false;
+		
 //		int year = Integer.parseInt(yearInput.getText());
 		String username = usernameInput.getText();
-		isLoggedIn = false;
-		BufferedReader br = new BufferedReader(new FileReader("UserData.txt"));
+		
+		
 		if(username.isBlank()) {
 			throw new IllegalArgumentException("Invalid login credentials!");
 		}
-		for (String line = br.readLine(); line != null; line = br.readLine()) {
-			line = line.split(";")[0];
-//			System.out.println(line);  prints all registrererd users
-			if(line.equals(username)){
+		
+		for(int i = 0; i<UserProfile.userProfiles.size(); i++) {
+			UserProfile userProfile = (UserProfile) UserProfile.userProfiles.get(i);
+			
+			userProfile.setLoggedIn(false);
+			if(userProfile.getUsernameInput().equals(username)) {
+				userProfile.setLoggedIn(true);
+				System.out.println(userProfile.getUsernameInput() + "logged in:   " + userProfile.isLoggedIn());
 				isLoggedIn = true;
 				loggedInUser = username;
 				loggedInText.setText("Velkommen " + loggedInUser);
+				setActiveAccount(userProfile);
 			}
 		}
+		
+		
+	
+		
+		
+//		for (String line = br.readLine(); line != null; line = br.readLine()) {
+//			line = line.split(";")[0];
+//			System.out.println(line);  prints all registrererd users
+//			if(line.equals(username)){
+//				isLoggedIn = true;
+//				loggedInUser = username;
+//				loggedInText.setText("Velkommen " + loggedInUser);
+//			}
+//		}
 		if (!isLoggedIn) {
 			loggedInText.setText("User doesn't exist.");
 		}
@@ -100,10 +122,13 @@ public class MainController implements Initializable{
 		UserProfile.registerUser(username, new HashMap<String, String>(), false);
 		loggedInText.setText("Velkommen " + username);
 		isLoggedIn = true;
+		SaveHandler saveHandler = new SaveHandler();
+		saveHandler.saveUserData("UserData");
+		
 	}
 
 	public void openGradesWindow(ActionEvent event) throws IOException {  //good
-		if(isLoggedIn) {
+		if(getActiveAccount().isLoggedIn()) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("grades.fxml"));
 		Parent mainRoot = loader.load();
 		Scene mainScene = new Scene(mainRoot);
@@ -122,6 +147,17 @@ public class MainController implements Initializable{
 
 	public void setLoggedInText(Text isLoggedIn) {
 		this.loggedInText = isLoggedIn;
+	}
+
+
+
+	public static UserProfile getActiveAccount() {
+		return activeAccount;
+	}
+
+
+	public static void setActiveAccount(UserProfile activeAccount) {
+		MainController.activeAccount = activeAccount;
 	}
 	
 }

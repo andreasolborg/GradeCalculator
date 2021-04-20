@@ -22,6 +22,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		
 		try {
+			SaveHandler saveHandler = new SaveHandler();
+			saveHandler.loadToOuterMap("UserGrades");
+					
 			Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 			Scene mainScene = new Scene(root);
 			primaryStage.setTitle("Hjemmeside");

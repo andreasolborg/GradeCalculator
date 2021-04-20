@@ -1,12 +1,32 @@
-Seb;Chillfag=D, Fag1=D, Fag3=D, Diskmat=A, Fag4=D, S�K1000=B, Samf�k=D
-Skjalg Nys�ter;Java=E, Mek=B, Diskmat=A, ITGK=B
+t5;a=A
+Test3333;=F
 Thea Tangen;test=C, S1 matte=D, Fag1=B, Fag3=B, Fag2=B, Fag4=B
-Thea;Sweet=A, Sot=E, Mans=C
-Jon;Diskmat=C, aaaa=A
 Freddy;Java=E, Diskmat=F
-Ludde;Fag1=C, Fag3=C, Fag2=C, Fag4=C
+Jon2;Legg inn fag=A
+Andy B2;Legg inn fag=A
+Andy B3;Legg inn fag=A
+Test2;Legg inn fag=A
+Andy B4;Legg inn fag=A
+Thea;Heipadeg=D, Sweet=E, Sot=C, Mans=C
+5555;Legg inn fag=A
+Andreas Olborg;Test1=A, test5=A, test3=B, Test2=A
+a;a=B
+bbbb1;
+Skjalg Nys�ter;Java=E, Mek=B, Diskmat=A, ITGK=B
+Jon;Legg inn fag=A
 Andy55;Legg inn fag=A
 Daniel;it1=A, Apex=E
-Andy B;Matte1=B, Matte2=A, Matte58=A
+Andy B;Matte1=A, Matte2=A, Matte58=A
 Eirik;TestFag2=C, Sonans=B, Test2=C
-Andreas Olborg;Test1=A, test5=A, test3=B, Test2=A
+bbbb;=F
+Seb;Chillfag=D, Fag1=D, Fag3=D, Diskmat=A, Fag4=D, S�K1000=B, Samf�k=D
+B3;Legg inn fag=A
+55551;Legg inn fag=A
+bb3;Disko1=A
+bb2;A=A, D2=A
+bb5;TEST2=B
+bb4;Test1=A
+55554;Legg inn fag=A
+Ludde;Fag1=C, Fag3=C, Fag2=C, Fag4=C
+t2;vv=B
+t3;Test1=C

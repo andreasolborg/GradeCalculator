@@ -68,7 +68,6 @@ public class SaveHandler implements saver {
 	}
 }
 
-	 
 	public void loadToOuterMap(String filename) throws FileNotFoundException {
 		String[] stringSplitter = null;	
 		try {
@@ -101,7 +100,12 @@ public class SaveHandler implements saver {
 //					UserProfile.outerMap.get(stringSplitter[0]).put(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);						
 //					(stringSplitter[0], UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]));  //maa putte et unikt hashmap, ikke userGrades
 
-				} UserProfile.userProfiles.add(userProfile);
+				} //UserProfile.userProfiles.add(userProfile);
+			} else {
+				stringSplitter = s.split(";");      
+				UserProfile userProfile = new UserProfile(stringSplitter[0], new HashMap<String, String>(), false);
+				UserProfile.outerMap.put(userProfile.getUsernameInput(), new HashMap<>());
+				
 			}
 				
 			}

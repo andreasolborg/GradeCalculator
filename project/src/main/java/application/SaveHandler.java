@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javafx.scene.text.Text;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,25 +24,34 @@ import java.util.Scanner;
 
 
 public class SaveHandler implements saver {
-
-	List<String> gradesList = new ArrayList<String>();
-	String[] gradeSplitter;
 	
 	public final static String SAVE_FOLDER = "";
+	public String userString;
+	public List<String> userList = new ArrayList<String>();
+	
 
-	public void loadData(String filename) throws FileNotFoundException {
-		BufferedReader br = new BufferedReader(
-				new FileReader(getFilePath(filename)));
-	}
-
-	public void saveUserData(String filename) throws FileNotFoundException {
+	public void loadUserData(String filename, HashMap<String, String> Users) throws FileNotFoundException {
 		try {
-			BufferedWriter bw = new BufferedWriter(
-					new FileWriter(getFilePath(filename), true));
 			BufferedReader br = new BufferedReader(
 					new FileReader(getFilePath(filename)));
-			for(Map.Entry me : UserProfile.Users.entrySet()) {
-				bw.append(me.getKey() +"\n");
+			String s;
+			while((s = br.readLine()) != null) {
+				Users.put(s, "");
+			}
+		} catch (Exception e) {
+			System.out.println("Error loading users.");
+		}
+		
+	}
+
+	public void saveUserData(String filename, HashMap<String, String> Users) throws FileNotFoundException {
+		try {
+			BufferedWriter bw = new BufferedWriter(
+					new FileWriter(getFilePath(filename)));
+			BufferedReader br = new BufferedReader(
+					new FileReader(getFilePath(filename)));
+			for(Map.Entry me :Users.entrySet()) {
+				bw.append(me.getKey() +"\n");                    //saves the userNames in seperate textFile
 			}
 			br.close();
 			bw.close();
@@ -50,7 +60,7 @@ public class SaveHandler implements saver {
 		}
 }
 		
-	public void saveUserGrades(String filename) throws FileNotFoundException {
+	public void saveUserGrades(String filename, HashMap<String, HashMap<String, String>> outerMap) throws FileNotFoundException {
 		try {
 //			System.out.println("UserProfile.outerMap.toString(): --------------- " + UserProfile.outerMap.toString());	
 			BufferedWriter bw = new BufferedWriter(
@@ -58,9 +68,10 @@ public class SaveHandler implements saver {
 			BufferedReader br = new BufferedReader(
 					new FileReader(getFilePath(filename)));
 			
-			for(Map.Entry me : UserProfile.outerMap.entrySet()) {	
+			for(Map.Entry me : outerMap.entrySet()) {	
 				bw.write(me.getKey() + ";" + me.getValue().toString().replaceAll("(\\{|\\})", "")+"\n");
-			}		
+
+			}
 			br.close();
 			bw.close();					
 			}catch(Exception ex) {
@@ -68,9 +79,9 @@ public class SaveHandler implements saver {
 	}
 }
 
-	public void loadToOuterMap(String filename) throws FileNotFoundException {
+	public void loadToOuterMap(String filename, HashMap<String, HashMap<String, String>> outerMap) throws Exception {
+		UserProfile.userProfiles.clear();
 		String[] stringSplitter = null;	
-		try {
 			BufferedWriter bw = new BufferedWriter(
 					new FileWriter(getFilePath(filename), true));
 			BufferedReader br = new BufferedReader(
@@ -78,46 +89,29 @@ public class SaveHandler implements saver {
 			String s;
 			while((s = br.readLine()) != null) {
 				if(s.contains("=")) {
-				stringSplitter = s.split(";");                                 //splits names and grades
-				String [] gradesSplitter = stringSplitter[1].split(", ");
-				
-//																																							System.out.println(stringSplitter[0]);
-//																																							System.out.println(stringSplitter[1].split(", ")[0].split("=")[0]);				   //prints first course for ea person							
-//																																							System.out.println(stringSplitter[0]);
-//				UserProfile.userGrades = new HashMap<>();
+				stringSplitter = s.split(";");                                 //splits names and courses
+				String [] gradesSplitter = stringSplitter[1].split(", ");      //splits courses
 				UserProfile userProfile = new UserProfile(stringSplitter[0], new HashMap<String, String>(), false);
-				UserProfile.outerMap.put(userProfile.getUsernameInput(), new HashMap<>());
+				outerMap.put(userProfile.getUsernameInput(), new HashMap<>());
 				for(int i = 0; i < gradesSplitter.length; i++) {
-					Course course = new Course(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);
-					userProfile.userGrades.put(course.getCourseName(), course.getGrade());
-					userProfile.setUserGrades(userProfile.userGrades);
-					UserProfile.outerMap.put(userProfile.getUsernameInput(), userProfile.userGrades);			
-//					UserProfile.outerMap.get(userProfile.getUsernameInput()).put(course.getCourseName(), course.getGrade());
-
-//																																							System.out.println(gradesSplitter[i].split("=")[0]);
-//																																							System.out.println(gradesSplitter[i].split("=")[1]);   //hver brukers karakter
-//																																							UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);								
-//					UserProfile.outerMap.get(stringSplitter[0]).put(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]);						
-//					(stringSplitter[0], UserProfile.addGrades(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1]));  //maa putte et unikt hashmap, ikke userGrades
-
-				} //UserProfile.userProfiles.add(userProfile);
+					Course course = new Course(gradesSplitter[i].split("=")[0], gradesSplitter[i].split("=")[1].substring(0,1));
+					userProfile.getUserGrades().put(course.getCourseName(), course.getGrade());
+					userProfile.setUserGrades(userProfile.getUserGrades());
+					userProfile.courseObjects.add(course);		//adds the new Course-objects into current user list of userGrades
+					outerMap.put(userProfile.getUsernameInput(), userProfile.getUserGrades());			
+				}
 			} else {
 				stringSplitter = s.split(";");      
 				UserProfile userProfile = new UserProfile(stringSplitter[0], new HashMap<String, String>(), false);
-				UserProfile.outerMap.put(userProfile.getUsernameInput(), new HashMap<>());
-				
+				outerMap.put(userProfile.getUsernameInput(), new HashMap<>());
 			}
 				
 			}
-//			System.out.println(UserProfile.userGrades.toString());
 			br.close();
 			bw.close();	
-		}catch(Exception ex) {
-			System.err.println(ex);
-			return;
-		}
 		}
 		
+
 	public String getFilePath(String filename) {
 		return SAVE_FOLDER + filename + ".txt";
 	}

@@ -27,9 +27,10 @@ import javafx.stage.Stage;
 public class MainController implements Initializable{
 
 	public static boolean isLoggedIn;
-	public static String loggedInUser;
+	public static String loggedInUser;				//static pga sendern over til gradesController
 	private UserProfile userProfile;
 	private static UserProfile activeAccount;
+	private String throwingText;
 	
 	@FXML
 	public Button loginButton, registerButton;
@@ -42,17 +43,20 @@ public class MainController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		SaveHandler saveHandler = new SaveHandler();
+		try {
+			saveHandler.loadUserData("UserData", UserProfile.Users);
+			System.out.println(UserProfile.Users.toString());
+			saveHandler.loadToOuterMap("UserGrades", UserProfile.outerMap);
+		} catch (Exception e) {
+			loggedInText.setText("Something went wrong loading data!");
+		}
+		
 		if(loggedInUser != null) {
 			loggedInText.setText("Velkommen " + loggedInUser);
 			usernameInput.setText(loggedInUser);
 		}
-	
-	
-//		SaveHandler saveHandler = new SaveHandler();
-//			saveHandler.loadToOuterMap("UserGrades");
-//			System.out.println(UserProfile.outerMap.toString());
-		
-		
+
 			System.out.println(UserProfile.userProfiles);
 			for(int i = 0; i<UserProfile.userProfiles.size(); i++) {
 				UserProfile userProfile = (UserProfile) UserProfile.userProfiles.get(i);
@@ -60,23 +64,17 @@ public class MainController implements Initializable{
 			}
 	}
 	
-	
-	
 	public void verifyLoginCredentials(ActionEvent event) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader("UserData.txt"));
 		isLoggedIn = false;
-		
-//		int year = Integer.parseInt(yearInput.getText());
 		String username = usernameInput.getText();
 		
-		
+		try {
 		if(username.isBlank()) {
 			throw new IllegalArgumentException("Invalid login credentials!");
 		}
-		
-		for(int i = 0; i<UserProfile.userProfiles.size(); i++) {
+		for(int i = 0; i<UserProfile.userProfiles.size(); i++) {																//loop through list of userProfile objects. Finds if it is registrered and sets user active.
 			UserProfile userProfile = (UserProfile) UserProfile.userProfiles.get(i);
-			
 			userProfile.setLoggedIn(false);
 			if(userProfile.getUsernameInput().equals(username)) {
 				userProfile.setLoggedIn(true);
@@ -87,9 +85,10 @@ public class MainController implements Initializable{
 				setActiveAccount(userProfile);
 			}
 		}
+	}catch(Exception e) {
+		loggedInText.setText("Inputfield cannot be blank. ");
+	}
 		
-		
-	
 		
 		
 //		for (String line = br.readLine(); line != null; line = br.readLine()) {
@@ -101,33 +100,34 @@ public class MainController implements Initializable{
 //				loggedInText.setText("Velkommen " + loggedInUser);
 //			}
 //		}
-		if (!isLoggedIn) {
-			loggedInText.setText("User doesn't exist.");
-		}
+
+		
+//		if (!isLoggedIn) {
+//			loggedInText.setText("User doesn't exist.");
+//		}
 	}	
 	
 	public void registerUser(ActionEvent event) throws IOException {
-//		int year = Integer.parseInt(yearInput.getText());
+		try {
 		String username = usernameInput.getText();
 		BufferedReader br = new BufferedReader(new FileReader("UserData.txt"));
 		for (String line = br.readLine(); line != null; line = br.readLine()) {
-			line = line.split(";")[0];
+//			line = line.split(";")[0];
 			if(line.equals(username)){
-				
-				loggedInText.setText("User already exists");
 				throw new IllegalArgumentException("User already exists");
 			}
+		} br.close();
+		UserProfile.registerUser(username, new HashMap<String, String>(), false);   //makes new UserProfile
+		
+		loggedInText.setText("Registration of " + username + " completed.");
+		
+		}catch(Exception e) {
+			loggedInText.setText("User already exists, or field is blank.");
 		}
-		
-		UserProfile.registerUser(username, new HashMap<String, String>(), false);
-		loggedInText.setText("Velkommen " + username);
-		isLoggedIn = true;
-		SaveHandler saveHandler = new SaveHandler();
-		saveHandler.saveUserData("UserData");
-		
 	}
 
 	public void openGradesWindow(ActionEvent event) throws IOException {  //good
+		try {
 		if(getActiveAccount().isLoggedIn()) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("grades.fxml"));
 		Parent mainRoot = loader.load();
@@ -135,8 +135,9 @@ public class MainController implements Initializable{
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(mainScene);
 		window.show();
-		}else {
-			loggedInText.setText("Log in first");
+		}
+		} catch(Exception e){
+			loggedInText.setText("Log in first!");
 		}
 	}
 
@@ -145,10 +146,9 @@ public class MainController implements Initializable{
 		return loggedInText;
 	}
 
-	public void setLoggedInText(Text isLoggedIn) {
-		this.loggedInText = isLoggedIn;
+	public void setLoggedInText(Text loggedInText) {
+		this.loggedInText = loggedInText;
 	}
-
 
 
 	public static UserProfile getActiveAccount() {

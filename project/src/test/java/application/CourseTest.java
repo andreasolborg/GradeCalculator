@@ -18,7 +18,7 @@ public class CourseTest {
 	
 	
 	@Test
-	public void testChangeCourseProperties() {
+	public void testConstructor() {
 		course.setGrade("A");
 		Assertions.assertEquals("A", course.getGrade());
 		Assertions.assertEquals("TestCourse", course.getCourseName());
@@ -33,5 +33,11 @@ public class CourseTest {
 		});
 	}
 	
+	@Test
+	public void testShouldThrowExceptionWhenCoursenameIsBlank() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			course.setCourseName("");
+		});
+	}
  
 }

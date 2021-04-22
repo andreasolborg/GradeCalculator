@@ -5,14 +5,21 @@ public class Course { // i denne klassen lager vi et Course objekt, som innehold
 	private String grade;
 	
 	public Course(String courseName, String grade) {
-		checkValidCourse(grade);
+		checkValidGrade(grade);
+		checkValidCourse(courseName);
 		this.courseName = courseName;
 		this.grade = grade;
 	}
 	
-	public void checkValidCourse(String grade) {
-		if(!(grade.contains("A") || grade.contains("B") || grade.contains("C") || grade.contains("D") || grade.contains("E")  || grade.contains("F"))) {
+	public void checkValidGrade(String grade) {
+		if(!(grade.equals("A") || grade.equals("B") || grade.equals("C") || grade.equals("D") || grade.equals("E")  || grade.equals("F"))) {
 			throw new IllegalArgumentException("Invalid grade");
+		}
+	}
+	
+	public void checkValidCourse(String courseName) {
+		if(courseName.isBlank()) {
+			throw new IllegalArgumentException("Coursename is blank.");
 		}
 	}
 	
@@ -21,6 +28,7 @@ public class Course { // i denne klassen lager vi et Course objekt, som innehold
 	}
 
 	public void setCourseName(String courseName) {
+		checkValidCourse(courseName);
 		this.courseName = courseName;
 	}
 	
@@ -29,12 +37,12 @@ public class Course { // i denne klassen lager vi et Course objekt, som innehold
 	}
 
 	public void setGrade(String grade) {
-		checkValidCourse(grade);
+		checkValidGrade(grade);
 		this.grade = grade;
 	}
 
 
 	public static void main(String[] args) {
-
+		Course course = new Course("Add", "F");
 	}
 }

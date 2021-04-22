@@ -14,8 +14,9 @@ public class UserProfile {
 	
 	static HashMap<String, HashMap<String, String>> outerMap = new HashMap<>();   //2d hashmap
 	static HashMap<String, String> Users = new HashMap<>();
-	public HashMap<String, String> userGrades;
+	HashMap<String, String> userGrades;
 	public static List<Object> userProfiles = new ArrayList<Object>();
+	public List<Object> courseObjects;
 	
 
 	public UserProfile(String usernameInput, HashMap<String, String> userGrades, boolean isLoggedIn) {
@@ -23,6 +24,7 @@ public class UserProfile {
 		this.userGrades = new HashMap<String, String>();
 		this.usernameInput = usernameInput;
 		this.setLoggedIn(false);
+		this.courseObjects = new ArrayList<Object>(); 
 		userProfiles.add(this);
 	}
 	
@@ -33,27 +35,21 @@ public class UserProfile {
 	public static void registerUser(String user, HashMap<String, String> userGrades, boolean isLoggedIn) throws FileNotFoundException {               //lager ny UserProfile, legger til i HashMap "Users"	
 		SaveHandler saveHandler = new SaveHandler();
 		UserProfile userProfile = new UserProfile(user, new HashMap<String, String>(), false);	
-//		userProfile.userGrades.put("Legg inn fag", "A");
 		System.out.println(userProfile.userGrades);
 		Users.put(userProfile.getUsernameInput(), "");
 		outerMap.put(userProfile.getUsernameInput(), userProfile.userGrades);
-		saveHandler.saveUserData("UserData");	
-		saveHandler.saveUserGrades("UserGrades");
+		saveHandler.saveUserData("UserData", Users);	
+		saveHandler.saveUserGrades("UserGrades", outerMap);
 		//
 	}
 	
 	
 	public void validUsername(String user) {	     //valideringsmetode
-		if (user.isEmpty() || user.isBlank()) {
-			throw new IllegalArgumentException("Year must be >= 0 and user !blank");
+		if (user.matches(".*[0-9]") || user.isEmpty() || user.isBlank()) {
+			throw new IllegalArgumentException("Username cant contain numbers, and cant be bla");
 			}
 	}
 	
-	public void validGradesMap() {
-		if(userGrades.isEmpty()) {
-			throw new IllegalArgumentException("Empty grademap!");
-		}
-	}
 	
 	@Override
 	public String toString() {
@@ -67,16 +63,16 @@ public class UserProfile {
 	}
 
 	public void setUsernameInput(String usernameInput) {
+		validUsername(usernameInput);
 		this.usernameInput = usernameInput;
 	}
 
-	
 	public HashMap<String, String> getUserGrades() {
 		return userGrades;
 	}
 	
 
-	public void setUserGrades(HashMap<String, String> userGrades) {
+	void setUserGrades(HashMap<String, String> userGrades) {
 		this.userGrades = userGrades;
 	}
 
@@ -88,4 +84,8 @@ public class UserProfile {
 		this.isLoggedIn = isLoggedIn;
 	}
 
+	public static void main(String[] args) {
+		UserProfile userProfile = new UserProfile("2", new HashMap<String, String>(), false);
+		
+	}
 }

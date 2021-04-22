@@ -1,0 +1,2 @@
+Johan;TestCourse10=B, TestCourse11=B
+Andy;TestCourse1=A, TestCourse2=A

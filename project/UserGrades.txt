@@ -1,32 +1,10 @@
-t5;a=A
-Test3333;=F
+Caroline Eriksen Thommesen;Arbeids og organisasjon=C, Utviklingspsykologi=A
+Seb;Chillfag=D, Fag1=D, Samf�k=D, S�K1000=B, Fag3=D, Diskmat=A, Fag4=D
 Thea Tangen;test=C, S1 matte=D, Fag1=B, Fag3=B, Fag2=B, Fag4=B
+Skjalg Nysaeter;Java=E, Mek=B, Diskmat=A, ITGK=B
+Thea;Sweet=A, Mans=C, S�t=E
 Freddy;Java=E, Diskmat=F
-Jon2;Legg inn fag=A
-Andy B2;Legg inn fag=A
-Andy B3;Legg inn fag=A
-Test2;Legg inn fag=A
-Andy B4;Legg inn fag=A
-Thea;Heipadeg=D, Sweet=E, Sot=C, Mans=C
-5555;Legg inn fag=A
-Andreas Olborg;Test1=A, test5=A, test3=B, Test2=A
-a;a=B
-bbbb1;
-Skjalg Nys�ter;Java=E, Mek=B, Diskmat=A, ITGK=B
-Jon;Legg inn fag=A
-Andy55;Legg inn fag=A
-Daniel;it1=A, Apex=E
-Andy B;Matte1=A, Matte2=A, Matte58=A
-Eirik;TestFag2=C, Sonans=B, Test2=C
-bbbb;=F
-Seb;Chillfag=D, Fag1=D, Fag3=D, Diskmat=A, Fag4=D, S�K1000=B, Samf�k=D
-B3;Legg inn fag=A
-55551;Legg inn fag=A
-bb3;Disko1=A
-bb2;A=A, D2=A
-bb5;TEST2=B
-bb4;Test1=A
-55554;Legg inn fag=A
 Ludde;Fag1=C, Fag3=C, Fag2=C, Fag4=C
-t2;vv=B
-t3;Test1=C
+Daniel;it1=A, Apex=E
+Andy B;Matte1=A, Matte2=A, Matte58=E
+Eirik;TestFag2=C, Sonans=B, Test2=C

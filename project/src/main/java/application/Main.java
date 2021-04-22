@@ -10,21 +10,18 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
 
 
 public class Main extends Application {	
-	
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws IOException {
 		
 		try {
-			SaveHandler saveHandler = new SaveHandler();
-			saveHandler.loadToOuterMap("UserGrades");
-					
 			Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 			Scene mainScene = new Scene(root);
 			primaryStage.setTitle("Hjemmeside");
@@ -32,7 +29,7 @@ public class Main extends Application {
 			primaryStage.show();
 			
 		} catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Something went wrong loading scene");
 		}
 	}
 	

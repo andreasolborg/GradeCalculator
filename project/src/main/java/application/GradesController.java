@@ -116,7 +116,7 @@ public class GradesController implements Initializable {
 		addFieldsToList();	
 		loggedInUser = MainController.loggedInUser;
 		isLoggedIn = true;
-		activeUser.setText("Bruker: " + activeAccount.getUsernameInput());
+		activeUser.setText(activeAccount.getUsernameInput());
 		
 
 		course1.setItems(list);
@@ -146,14 +146,18 @@ public class GradesController implements Initializable {
 		activeAccount.getUserGrades().clear();											//for å ikke få ekstra fag når man erstattet et TextField
 		UserProfile.outerMap.get(loggedInUser).clear();
 		System.out.println("Du er logget inn som " + loggedInUser);
-		
-		for(int i = 0; i < courseNameList.size(); i++) { 		//Make course-object
-			if(!courseNameList.get(i).getText().isEmpty() && !courseGradeList.get(i).getValue().equals(null)) {
-				Course courseObject = new Course(courseNameList.get(i).getText(), courseGradeList.get(i).getValue());
-				activeAccount.courseObjects.add(courseObject);
-				activeAccount.getUserGrades().put(courseObject.getCourseName(), courseObject.getGrade());
+	
+			try{
+				for(int i = 0; i < courseNameList.size(); i++) { 		//Make course-object
+				if(!courseNameList.get(i).getText().isEmpty() && !courseGradeList.get(i).getValue().equals(null)) {
+					Course courseObject = new Course(courseNameList.get(i).getText(), courseGradeList.get(i).getValue());
+					activeAccount.courseObjects.add(courseObject);
+					activeAccount.getUserGrades().put(courseObject.getCourseName(), courseObject.getGrade());
+				}
+			}	
+			}catch(Exception e) {
+				resultBox.setText("Some fields are blank");
 			}
-		}
 		System.out.println("You have " + (courseNameList.size() - gradesList.size()) + " empty fields.");
 		activeAccount.getUserGrades().values().removeAll(Collections.singleton(null));										//Removes null objects
 		UserProfile.outerMap.put(activeAccount.getUsernameInput(), activeAccount.getUserGrades());							//Put to outermap
@@ -164,7 +168,7 @@ public class GradesController implements Initializable {
 	
 		List<String> values = new ArrayList<>(activeAccount.getUserGrades().values());
 		Calculation calc = new Calculation();
-		resultBox.setText(activeAccount.getUsernameInput() + " has an average grade score of " + calc.Calculate(values) + "\nYou can add: " + (courseNameList.size() - gradesList.size()) + " more courses.");
+		resultBox.setText(activeAccount.getUsernameInput() + calc.Calculate(values) + "\nYou can add: " + (courseNameList.size() - gradesList.size()) + " more courses.");
 		
 //		System.out.println(UserProfile.outerMap.toString());
 //		System.out.println("UserProfile.outerMap.get(loggedInUser)         " + UserProfile.outerMap.get(loggedInUser));

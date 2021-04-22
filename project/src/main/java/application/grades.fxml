@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -12,10 +7,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #f9aa33;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GradesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="500.0" style="-fx-background-color: #f9aa33;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GradesController">
    <children>
-      <Button fx:id="addGrades" layoutX="50.0" layoutY="388.0" mnemonicParsing="false" onAction="#addGrades" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #344955;" text="Add grades to user" textAlignment="CENTER" textFill="#f9aa33">
+      <Button fx:id="addGrades" contentDisplay="CENTER" layoutX="50.0" layoutY="344.0" mnemonicParsing="false" onAction="#addGrades" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #344955;" text="Add grades to user" textAlignment="CENTER" textFill="#f9aa33">
          <font>
             <Font name="Calibri Bold" size="25.0" />
          </font>
@@ -23,7 +19,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="50.0" layoutY="37.0" mnemonicParsing="false" onAction="#openHomeWindow" prefHeight="6.0" prefWidth="94.0" style="-fx-background-color: #344955;" text="Back" textAlignment="CENTER" textFill="#f9aa33">
+      <Button layoutX="57.0" layoutY="30.0" mnemonicParsing="false" onAction="#openHomeWindow" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #344955;" text="Back" textAlignment="CENTER" textFill="#f9aa33">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
@@ -31,28 +27,38 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextArea fx:id="resultBox" layoutX="50.0" layoutY="464.0" prefHeight="96.0" prefWidth="400.0" style="-fx-background-color: #344955;" />
-      <TextField fx:id="courseName1" layoutX="57.0" layoutY="95.0" promptText="Navn på fag" />
-      <ComboBox fx:id="course7" layoutX="56.0" layoutY="321.0" prefWidth="150.0" />
-      <ComboBox fx:id="course8" layoutX="295.0" layoutY="321.0" prefWidth="150.0" />
-      <ComboBox fx:id="course5" layoutX="56.0" layoutY="258.0" prefWidth="150.0" />
-      <ComboBox fx:id="course6" layoutX="295.0" layoutY="258.0" prefWidth="150.0" />
-      <ComboBox fx:id="course3" layoutX="56.0" layoutY="194.0" prefWidth="150.0" />
-      <ComboBox fx:id="course4" layoutX="295.0" layoutY="194.0" prefWidth="150.0" />
-      <ComboBox fx:id="course1" layoutX="56.0" layoutY="126.0" prefWidth="150.0" />
-      <ComboBox fx:id="course2" layoutX="295.0" layoutY="126.0" prefWidth="150.0" />
-      <TextField fx:id="courseName3" layoutX="57.0" layoutY="159.0" promptText="Navn på fag" />
-      <TextField fx:id="courseName2" layoutX="296.0" layoutY="95.0" promptText="Navn på fag" />
-      <TextField fx:id="courseName4" layoutX="296.0" layoutY="161.0" promptText="Navn på fag" />
-      <TextField fx:id="courseName5" layoutX="57.0" layoutY="226.0" promptText="Navn på fag" />
-      <TextField fx:id="courseName6" layoutX="296.0" layoutY="226.0" promptText="Navn på fag" />
-      <TextField fx:id="courseName8" layoutX="296.0" layoutY="288.0" promptText="Navn på fag" />
-      <TextField fx:id="courseName7" layoutX="57.0" layoutY="288.0" promptText="Navn på fag" />
-      <Text fx:id="activeUser" layoutX="295.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User:" wrappingWidth="140.0">
+      <TextArea fx:id="resultBox" editable="false" layoutX="50.0" layoutY="413.0" prefHeight="70.0" prefWidth="400.0" promptText="Add some grades" style="-fx-background-color: transparent;">
          <font>
-            <Font name="Calibri" size="14.0" />
+            <Font name="Calibri Bold" size="15.0" />
+         </font></TextArea>
+      <ComboBox fx:id="course7" layoutX="56.0" layoutY="301.0" prefWidth="150.0" />
+      <ComboBox fx:id="course8" layoutX="295.0" layoutY="301.0" prefWidth="150.0" />
+      <ComboBox fx:id="course5" layoutX="56.0" layoutY="238.0" prefWidth="150.0" />
+      <ComboBox fx:id="course6" layoutX="295.0" layoutY="238.0" prefWidth="150.0" />
+      <ComboBox fx:id="course3" layoutX="56.0" layoutY="174.0" prefWidth="150.0" />
+      <ComboBox fx:id="course4" layoutX="295.0" layoutY="174.0" prefWidth="150.0" />
+      <ComboBox fx:id="course1" layoutX="56.0" layoutY="106.0" prefWidth="150.0" />
+      <ComboBox fx:id="course2" layoutX="295.0" layoutY="106.0" prefWidth="150.0" />
+      <TextField fx:id="courseName3" layoutX="57.0" layoutY="139.0" promptText="Navn på fag" />
+      <TextField fx:id="courseName1" layoutX="57.0" layoutY="75.0" promptText="Navn på fag" />
+      <TextField fx:id="courseName2" layoutX="296.0" layoutY="75.0" promptText="Navn på fag" />
+      <TextField fx:id="courseName4" layoutX="296.0" layoutY="141.0" promptText="Navn på fag" />
+      <TextField fx:id="courseName5" layoutX="57.0" layoutY="206.0" promptText="Navn på fag" />
+      <TextField fx:id="courseName6" layoutX="296.0" layoutY="206.0" promptText="Navn på fag" />
+      <TextField fx:id="courseName8" layoutX="296.0" layoutY="268.0" promptText="Navn på fag" />
+      <TextField fx:id="courseName7" layoutX="57.0" layoutY="268.0" promptText="Navn på fag" />
+      <Text fx:id="activeUser" layoutX="131.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User:" textAlignment="CENTER" wrappingWidth="318.0">
+         <font>
+            <Font name="Calibri Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="clearMap" layoutX="154.0" layoutY="38.0" mnemonicParsing="false" onAction="#clearMap" text="Clear map" />
+      <Button fx:id="clearMap" layoutX="50.0" layoutY="498.0" mnemonicParsing="false" onAction="#clearMap" prefHeight="27.0" prefWidth="400.0" style="-fx-background-color: #344955;" text="Clear grades" textAlignment="CENTER" textFill="#f9aa33">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

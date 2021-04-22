@@ -1,3 +1,4 @@
+Caroline Eriksen Thommesen;Arbeids og organisasjon=C, Utviklingspsykologi=A
 Seb;Chillfag=D, Fag1=D, Samf�k=D, S�K1000=B, Fag3=D, Diskmat=A, Fag4=D
 Thea Tangen;test=C, S1 matte=D, Fag1=B, Fag3=B, Fag2=B, Fag4=B
 Skjalg Nysaeter;Java=E, Mek=B, Diskmat=A, ITGK=B

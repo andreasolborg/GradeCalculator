@@ -1,1 +1,0 @@
-Jeg tror jeg må lage en load funksjon til Users. Også kan jeg droppe å ha bufferedReader i MainController, heller bare loade.
